@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="customer">
+	
+	<typeAlias alias="CustomerPojo" type="com.zc.zcproject.pojo.CustomerPojo"/>
+
+	<insert id="register" parameterClass="CustomerPojo">
+	    insert into customer (nick, realname, qq, telephone, address, sex, identity, pwd, email, random_code, registDate)
+		values (#nick#, #realname#, #qq#, #telephone#, #address#, #sex#, #identity#, #pwd#, #email#, #random_code#, now())
+		<selectKey resultClass="int" keyProperty="id">
+		    select last_insert_id() as id
+		</selectKey>
+	</insert>
+
+	<select id="login" parameterClass="CustomerPojo" resultClass="int">
+	    select count(1) from customer where nick=#nick# and pwd=#pwd# and isactivity=1
+	</select>	
+	
+	<select id="findCustomerPojoByLogin" resultClass="CustomerPojo" parameterClass="CustomerPojo"> 
+		select id, nick, realname, qq, telephone, address, sex, identity, pwd, email, isactivity from customer where nick=#nick# and pwd=#pwd#
+	</select>
+	
+	<select id="checkHasEmail" parameterClass="string" resultClass="int">
+		select count(1) from customer where email=#email#
+	</select>
+	
+	<select id="checkHasNick" parameterClass="string" resultClass="int">
+		select count(1) from customer where nick=#nick#
+	</select>
+	
+	<select id="findCustomerPojoById" parameterClass="int" resultClass="CustomerPojo">
+		select id, nick, realname, qq, telephone, address, sex, identity, pwd, email, isactivity, random_code, registDate, updatePwdTime from customer where id=#id#
+	</select>
+	
+	<update id="activiteCustomer" parameterClass="int">
+		update customer set isactivity=1 where id=#id#
+	</update>
+	
+	<select id="findCustomerPojoByNick" parameterClass="string" resultClass="CustomerPojo">
+		select id, nick, email, random_code from customer where nick=#nick#
+	</select>
+	
+	<update id="updateCustomerPwd" parameterClass="CustomerPojo">
+		update customer set pwd=#pwd# where id=#id#
+	</update>
+	
+	<update id="updatePwdTime" parameterClass="CustomerPojo">
+		update customer set updatePwdTime=now() where id=#id#
+	</update>
+</sqlMap>
