@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	
+<!-- customer -->
+<package name="customer" extends="struts-default" namespace="/customer">
+ 	 	 <action name="register" class="com.zc.zcproject.zzsc.action.customer.CustomerAction" method="register">
+			<result>/page/pages/register.jsp</result>
+			<result name="error">/page/pages/register.jsp</result>
+		</action>
+		<action name="login"
+			class="com.zc.zcproject.zzsc.action.customer.CustomerAction" method="login">
+			<result>/page/pages/index_ex.jsp</result>
+			<result name="error">/page/pages/login.jsp</result>
+			<result name="jump">${url}</result>
+		</action>
+		<action name="to_register" class="com.zc.zcproject.zzsc.action.customer.CustomerAction" method="to_register">
+		    <result>/page/pages/register.jsp</result>
+		</action>
+		<action name="to_login" class="com.zc.zcproject.zzsc.action.customer.CustomerAction" method="to_login">
+		    <result>/page/pages/login.jsp</result>
+		</action>
+		<action name="activiteAccount" class="com.zc.zcproject.zzsc.action.customer.CustomerAction" method="activiteAccount">
+			<result>/page/pages/activiteSuccess.jsp</result>
+			<result name="error">/page/pages/activiteFail.jsp</result>
+		</action>
+		<action name="logout" class="com.zc.zcproject.zzsc.action.customer.CustomerAction" method="logout">
+			<result>/page/pages/index_ex.jsp</result>
+		</action>
+		<action name="to_passwordSupport" class="com.zc.zcproject.zzsc.action.customer.CustomerAction" method="to_passwordSupport">
+			<result>/page/pages/confirm.jsp</result>
+		</action>
+		<action name="resetPwdVerify" class="com.zc.zcproject.zzsc.action.customer.CustomerAction" method="resetPwdVerify">
+			<result name="error">/page/pages/resetPwdFail.jsp</result>
+			<result>/page/pages/reset.jsp</result>
+		</action>
+		<action name="hasNick" class="com.zc.zcproject.zzsc.action.customer.CustomerAction" method="hasNick">
+			<result>/page/pages/safety.jsp</result>
+			<result name="error">/page/pages/confirm.jsp</result>
+		</action>
+		<action name="sendEmailResetPwd" class="com.zc.zcproject.zzsc.action.customer.CustomerAction" method="sendEmailResetPwd">
+				<result>/page/pages/safety.jsp</result>
+				<result name="error">/page/pages/safety.jsp</result>
+		</action>
+		<action name="resetPwd" class="com.zc.zcproject.zzsc.action.customer.CustomerAction" method="resetPwd">
+			<result type="">/page/pages/resetPwdSuccess.jsp</result>
+			<result name="error">/page/pages/reset.jsp</result>
+		</action>
+</package>
+
+
+</struts>
